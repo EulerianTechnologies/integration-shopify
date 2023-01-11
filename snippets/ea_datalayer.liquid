@@ -19,24 +19,45 @@
   {% endfor %}
 {% endif %}  
 {% if cart %}
+    "scart", 1,
+    "scartcumul", 0,
+  {% for item in cart.items %}
+    "prdref", "{{ item.product_id }}",
+    "prdquantity", "{{ item.quantity }}",
+    "prdamount", "{{ item.price | money_without_currency }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
 {% endif %}
 {% if template.name == 'product' %}
-{% elsif template.name == 'cart' %}
+    "prdref", "{{ product.id }}",
+    "prdname", "{{ product.title }}",
+    "prdparam-url", "{{ product.url }}",
+    "prdparam-vendor", "{{ product.vendor }}",
 {% elsif template.name == 'search' %}
+  {% for item in search.results %}
+    "prdref", "{{ item.id }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
 {% elsif template.name == 'collection' %}
+  {% for item in collection.products %}
+    "prdref", "{{ item.id }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
 {% endif %}
 {% if customer %}
 	"user_logged", "1",
 	"user_id", "{{ customer.id }}",
-    "user_email":,"{{ customer.email }}",
+    "user_email","{{ customer.email }}",
 	"user_first_name", "{{ customer.first_name }}",
 	"user_last_name", "{{ customer.last_name }}",
 {% else %}
   	"user_logged", "0",
 {% endif %}
-{% if template.name == 'product' %}
-{% endif %}
-{% if template.name == 'search' %}
-{% endif %}  
                 ];
 </script>
