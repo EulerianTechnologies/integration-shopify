@@ -1,55 +1,45 @@
 <script type="text/javascript">
 {% assign ea_tracking_subdomain = "dem.eulerian.net" %}
  var EA_data = [
-    "path","{{ page.title }}",
+    "path","{{ page.title }}"
 {% if customer %}
-    "uid","{{ customer.id }}",
-    "email","{{ customer.email | sha256 }}",
+    ,"uid","{{ customer.id }}"
+    ,"email","{{ customer.email | sha256 }}"
 {% endif %}
 {% if checkout %}
-    "ref", "{{ checkout.order_id }}",
-    "shipping_cost", "{{ checkout.shipping_price | money_without_currency }}",
-    "amount", "{{ checkout.total_price | money_without_currency }}",
-    "currency", "{{ checkout.currency.iso_code }}",
+    ,"ref", "{{ checkout.order_id }}"
+    ,"shipping_cost", "{{ checkout.shipping_price | money_without_currency }}"
+    ,"amount", "{{ checkout.total_price | money_without_currency }}"
+    ,"currency", "{{ checkout.currency.iso_code }}"
   {% for item in checkout.line_items %}
-    "prdref", "{{ item.product_id }}",
-    "prdquantity", "{{ item.quantity }}",
-    "prdamount", "{{ item.product.price | money_without_currency }}",
-    "prdname", "{{ item.product.title }}",
-    "prdparam-url", "{{ item.product.url }}",
-    "prdparam-vendor", "{{ item.product.vendor }}",
+    ,"prdref", "{{ item.product_id }}"
+    ,"prdquantity", "{{ item.quantity }}"
+    ,"prdamount", "{{ item.product.price | money_without_currency }}"
+    ,"prdname", "{{ item.product.title }}"
   {% endfor %}
 {% endif %}  
 {% if cart %}
-    "scart", 1,
-    "scartcumul", 0,
+    ,"scart", 1
+    ,"scartcumul", 0
   {% for item in cart.items %}
-    "prdref", "{{ item.product_id }}",
-    "prdquantity", "{{ item.quantity }}",
-    "prdamount", "{{ item.price | money_without_currency }}",
-    "prdname", "{{ item.title }}",
-    "prdparam-url", "{{ item.url }}",
-    "prdparam-vendor", "{{ item.vendor }}",
+    ,"prdref", "{{ item.product_id }}"
+    ,"prdquantity", "{{ item.quantity }}"
+    ,"prdamount", "{{ item.price | money_without_currency }}"
+    ,"prdname", "{{ item.title }}"
   {% endfor %}
 {% endif %}
 {% if template.name == 'product' %}
-    "prdref", "{{ product.id }}",
-    "prdname", "{{ product.title }}",
-    "prdparam-url", "{{ product.url }}",
-    "prdparam-vendor", "{{ product.vendor }}",
+    ,"prdref", "{{ product.id }}"
+    ,"prdname", "{{ product.title }}"
 {% elsif template.name == 'search' %}
   {% for item in search.results %}
-    "prdref", "{{ item.id }}",
-    "prdname", "{{ item.title }}",
-    "prdparam-url", "{{ item.url }}",
-    "prdparam-vendor", "{{ item.vendor }}",
+    ,"prdref", "{{ item.id }}"
+    ,"prdname", "{{ item.title }}"
   {% endfor %}
 {% elsif template.name == 'collection' %}
   {% for item in collection.products %}
-    "prdref", "{{ item.id }}",
-    "prdname", "{{ item.title }}",
-    "prdparam-url", "{{ item.url }}",
-    "prdparam-vendor", "{{ item.vendor }}",
+    ,"prdref", "{{ item.id }}"
+    ,"prdname", "{{ item.title }}"
   {% endfor %}
 {% endif %}
    ];
