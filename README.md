@@ -1,5 +1,5 @@
-# ![Eulerian logo](/img/eulerian_logo.png) Eulerian Integration
-## Install Eulerian on your Shopify store
+# ![Eulerian logo](/img/eulerian_logo.png) 
+# Install Eulerian on your Shopify store
 ### Structure of this repository
 Only files in config and snippets directory are needed for the installation
 ### Prerequisites
