@@ -1,0 +1,59 @@
+<script type="text/javascript">
+{% assign ea_tracking_subdomain = "dem.eulerian.net" %}
+ var EA_data = [
+    "path","{{ page.title }}",
+{% if customer %}
+    "uid","{{ customer.id }}",
+    "email","{{ customer.email | sha256 }}",
+{% endif %}
+{% if checkout %}
+    "ref", "{{ checkout.order_id }}",
+    "shipping_cost", "{{ checkout.shipping_price | money_without_currency }}",
+    "amount", "{{ checkout.total_price | money_without_currency }}",
+    "currency", "{{ checkout.currency.iso_code }}",
+  {% for item in checkout.line_items %}
+    "prdref", "{{ item.product_id }}",
+    "prdquantity", "{{ item.quantity }}",
+    "prdamount", "{{ item.product.price | money_without_currency }}",
+    "prdname", "{{ item.product.title }}",
+    "prdparam-url", "{{ item.product.url }}",
+    "prdparam-vendor", "{{ item.product.vendor }}",
+  {% endfor %}
+{% endif %}  
+{% if cart %}
+    "scart", 1,
+    "scartcumul", 0,
+  {% for item in cart.items %}
+    "prdref", "{{ item.product_id }}",
+    "prdquantity", "{{ item.quantity }}",
+    "prdamount", "{{ item.price | money_without_currency }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
+{% endif %}
+{% if template.name == 'product' %}
+    "prdref", "{{ product.id }}",
+    "prdname", "{{ product.title }}",
+    "prdparam-url", "{{ product.url }}",
+    "prdparam-vendor", "{{ product.vendor }}",
+{% elsif template.name == 'search' %}
+  {% for item in search.results %}
+    "prdref", "{{ item.id }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
+{% elsif template.name == 'collection' %}
+  {% for item in collection.products %}
+    "prdref", "{{ item.id }}",
+    "prdname", "{{ item.title }}",
+    "prdparam-url", "{{ item.url }}",
+    "prdparam-vendor", "{{ item.vendor }}",
+  {% endfor %}
+{% endif %}
+   ];
+  {% if  ea_tracking_subdomain %}
+(function(e,a){var i=e.length,y=5381,k='script',s=window,v=document,o=v.createElement(k);for(;i;){i-=1;y=(y*33)^e.charCodeAt(i)}y='_EA_'+(y>>>=0);(function(e,a,s,y){s[a]=s[a]||function(){(s[y]=s[y]||[]).push(arguments);s[y].eah=e;};}(e,a,s,y));i=new Date/1E7|0;o.ea=y;y=i%26;o.async=1;o.src='//'+e+'/'+String.fromCharCode(97+y,122-y,65+y)+(i%1E3)+'.js?2';s=v.getElementsByTagName(k)[0];s.parentNode.insertBefore(o,s);})('{{ ea_tracking_subdomain }}','EA_push');
+ {% endif %}
+</script>
