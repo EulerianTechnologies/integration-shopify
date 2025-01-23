@@ -61,7 +61,7 @@ Paste your tracking subdomain in the according text input, check the Enable butt
 ### 4. Adding the datalayer
 Create a new snippets, much the same way as you did in "Adding the container" step, using the content of this repository's file Snippets/ea_datalayer.liquid
 
-Use the exact same filename "dea_datalayer.liquid"
+Use the exact same filename "ea_datalayer.liquid"
 ### 5a. Including the setup on the pages and checkout tunnel - Shopify **Plus**
 Go back to the Theme Code edit section, as you did in Step 1.
 1. Scroll to Layout. You'll see the layout files.
