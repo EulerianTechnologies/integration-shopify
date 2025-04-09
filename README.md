@@ -1,3 +1,9 @@
+Following latest update on Shopify platform, this integration is DEPRECATED
+
+
+
+
+
 # ![Eulerian logo](/img/eulerian_logo.png) 
 # Install Eulerian on your Shopify store
 ### Structure of this repository
